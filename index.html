@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7DS78VMN1P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-7DS78VMN1P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>每秒工资计算器</title>
+    <meta name="description" content="实时每秒工资计算器，输入时薪立即开始计时，画面流畅展示当前已赚工资，炫酷金币特效+进度条动态显示，让赚钱的每一秒都更有趣！">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8336276656855850" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            width: 90%;
+            max-width: 900px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+        p.subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 2rem;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        .card {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            border: 1px solid #e0e0e0;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        .chatgpt {
+            background-color: #e7f7e7;
+            color: #10a37f;
+            border: 1px solid #10a37f;
+        }
+        .claude {
+            background-color: #f0e7f7;
+            color: #7e22ce;
+            border: 1px solid #7e22ce;
+        }
+        .deepseek {
+            background-color: #e7f1f7;
+            color: #0077b6;
+            border: 1px solid #0077b6;
+        }
+        .gemini {
+            background-color: #f7eee7;
+            color: #ea580c;
+            border: 1px solid #ea580c;
+        }
+        .card h2 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        .card p {
+            color: #7f8c8d;
+            margin-bottom: 0;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 2rem;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        .footer a {
+            color: #7f8c8d;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>每秒工资计算器</h1>
+        <p class="subtitle">选择不同AI模型创建的版本</p>
+
+        <div class="grid">
+            <!-- ChatGPT Cards -->
+            <a href="chatgpt_v1.html" style="text-decoration: none; color: inherit;">
+                <div class="card">
+                    <div class="card-icon chatgpt">GPT</div>
+                    <h2>ChatGPT 初版</h2>
+                    <p>OpenAI ChatGPT</p>
+                </div>
+            </a>
+
+            <a href="chatgpt_v3.html" style="text-decoration: none; color: inherit;">
+                <div class="card">
+                    <div class="card-icon chatgpt">GPT</div>
+                    <h2>ChatGPT 终版</h2>
+                    <p>OpenAI ChatGPT</p>
+                </div>
+            </a>
+
+            <!-- Claude Cards -->
+            <a href="claude_v1.html" style="text-decoration: none; color: inherit;">
+                <div class="card">
+                    <div class="card-icon claude">C</div>
+                    <h2>Claude 初版</h2>
+                    <p>Anthropic Claude</p>
+                </div>
+            </a>
+
+            <a href="claude_v2.html" style="text-decoration: none; color: inherit;">
+                <div class="card">
+                    <div class="card-icon claude">C</div>
+                    <h2>Claude 再版</h2>
+                    <p>Anthropic Claude</p>
+                </div>
+            </a>
+
+            <a href="claude_v3.html" style="text-decoration: none; color: inherit;">
+                <div class="card">
+                    <div class="card-icon claude">C</div>
+                    <h2>Claude 终版</h2>
+                    <p>Anthropic Claude</p>
+                </div>
+            </a>
+
+            <!-- DeepSeek Card -->
+            <a href="deepseek_v3.html" style="text-decoration: none; color: inherit;">
+                <div class="card">
+                    <div class="card-icon deepseek">D</div>
+                    <h2>DeepSeek 终版</h2>
+                    <p>DeepSeek R1</p>
+                </div>
+            </a>
+
+            <!-- Gemini Cards -->
+            <a href="gemini_v1.html" style="text-decoration: none; color: inherit;">
+                <div class="card">
+                    <div class="card-icon gemini">G</div>
+                    <h2>Gemini 初版</h2>
+                    <p>Google Gemini</p>
+                </div>
+            </a>
+
+            <a href="gemini_v3.html" style="text-decoration: none; color: inherit;">
+                <div class="card">
+                    <div class="card-icon gemini">G</div>
+                    <h2>Gemini 终版</h2>
+                    <p>Google Gemini</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="footer">
+            <a href="https://github.com/chn-lee-yumi/salary_calculator">&copy; 2025 每秒工资计算器 - 本项目在 GitHub 上开源</a>
+        </div>
+    </div>
+</body>
+</html>

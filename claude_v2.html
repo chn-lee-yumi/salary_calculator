@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7DS78VMN1P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-7DS78VMN1P');
+    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8336276656855850" crossorigin="anonymous"></script>
+  <title>实时工资计算器</title>
+  <meta name="description" content="实时每秒工资计算器，输入时薪立即开始计时，画面流畅展示当前已赚工资，炫酷金币特效+进度条动态显示，让赚钱的每一秒都更有趣！">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+      background-size: 600% 600%;
+      animation: gradientBG 15s ease infinite;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50% }
+      50% { background-position: 100% 50% }
+      100% { background-position: 0% 50% }
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36);
+      width: 80%;
+      max-width: 600px;
+      text-align: center;
+      color: white;
+      position: relative;
+      z-index: 10;
+    }
+
+    h1 {
+      margin-top: 0;
+      font-size: 2.5rem;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); }
+      to { text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6; }
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .input-group label {
+      font-size: 1.2rem;
+      margin-right: 10px;
+      width: 40%;
+      text-align: right;
+    }
+
+    .input-group input {
+      width: 60%;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      font-size: 1.1rem;
+      transition: all 0.3s;
+    }
+
+    .input-group input:focus {
+      outline: none;
+      background: rgba(255, 255, 255, 0.3);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+
+    button {
+      background: linear-gradient(45deg, #ff6b6b, #ffa07a);
+      border: none;
+      padding: 15px 30px;
+      color: white;
+      font-size: 1.2rem;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      margin: 10px;
+      font-weight: bold;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 7px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    button:active {
+      transform: translateY(1px);
+    }
+
+    .earnings-display {
+      margin: 30px 0;
+      position: relative;
+    }
+
+    #currentEarnings {
+      font-size: 4rem;
+      font-weight: bold;
+      margin: 10px 0;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+      display: inline-block;
+    }
+
+    .progress-container {
+      height: 30px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 15px;
+      margin: 20px 0;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #ffd700, #ff9900);
+      width: 0%;
+      border-radius: 15px;
+      transition: width 0.5s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .progress-bar::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.4) 50%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      animation: shine 1.5s infinite;
+    }
+
+    @keyframes shine {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    .status {
+      margin-top: 15px;
+      font-size: 1.2rem;
+      color: #ffffffcc;
+    }
+
+    .coin {
+      position: absolute;
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse at center, #ffd700 0%, #ffcc00 100%);
+      box-shadow: 0 0 10px #ffd700;
+      z-index: 1;
+      animation: fall 3s linear forwards;
+    }
+
+    @keyframes fall {
+      0% {
+        opacity: 1;
+        transform: translateY(-100vh) rotate(0deg);
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(100vh) rotate(360deg);
+      }
+    }
+
+    .particles-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .digit-animation {
+      animation: pop 0.3s ease-out;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+
+    .celebrate {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .celebration-text {
+      font-size: 3rem;
+      font-weight: bold;
+      color: gold;
+      text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+      animation: celebrateAnim 1.5s ease-out forwards;
+      opacity: 0;
+    }
+
+    @keyframes celebrateAnim {
+      0% { transform: scale(0.5); opacity: 0; }
+      70% { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(1); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="particles-container"></div>
+
+  <div class="container">
+    <h1>实时工资计算器</h1>
+
+    <div class="input-group">
+      <label for="hourlyRate">时薪 (元/小时):</label>
+      <input type="number" id="hourlyRate" min="0" step="0.01" value="50">
+    </div>
+
+    <div class="input-group">
+      <label for="workHours">工作时长 (小时):</label>
+      <input type="number" id="workHours" min="0" step="0.1" value="8">
+    </div>
+
+    <button id="startBtn">开始计时</button>
+    <button id="stopBtn" disabled>停止计时</button>
+
+    <div class="earnings-display">
+      <h2>当前已赚取工资</h2>
+      <div id="currentEarnings">¥0.00</div>
+
+      <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+
+      <div class="status" id="status">等待开始计时...</div>
+    </div>
+  </div>
+
+  <div class="celebrate" id="celebrate"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const hourlyRateInput = document.getElementById('hourlyRate');
+      const workHoursInput = document.getElementById('workHours');
+      const startBtn = document.getElementById('startBtn');
+      const stopBtn = document.getElementById('stopBtn');
+      const currentEarnings = document.getElementById('currentEarnings');
+      const progressBar = document.getElementById('progressBar');
+      const status = document.getElementById('status');
+      const particlesContainer = document.querySelector('.particles-container');
+      const celebrate = document.getElementById('celebrate');
+
+      let isRunning = false;
+      let startTime;
+      let hourlyRate;
+      let workHours;
+      let totalTargetAmount;
+      let animationFrameId;
+      let lastCoinMilestone = 0;
+
+      // 创建粒子背景
+      function createParticles() {
+        for (let i = 0; i < 50; i++) {
+          const particle = document.createElement('div');
+          particle.style.position = 'absolute';
+          particle.style.width = Math.random() * 5 + 'px';
+          particle.style.height = particle.style.width;
+          particle.style.backgroundColor = 'rgba(255, 255, 255, ' + (Math.random() * 0.5 + 0.1) + ')';
+          particle.style.borderRadius = '50%';
+          particle.style.top = Math.random() * 100 + 'vh';
+          particle.style.left = Math.random() * 100 + 'vw';
+
+          // 设置动画
+          const duration = Math.random() * 60 + 30;
+          particle.style.animation = `float ${duration}s linear infinite`;
+
+          // 添加关键帧
+          const keyframes = `
+            @keyframes float {
+              0% {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: ${Math.random() * 0.5 + 0.5};
+              }
+              25% {
+                transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) rotate(${Math.random() * 360}deg);
+              }
+              50% {
+                transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) rotate(${Math.random() * 360}deg);
+                opacity: ${Math.random() * 0.5 + 0.5};
+              }
+              75% {
+                transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) rotate(${Math.random() * 360}deg);
+              }
+              100% {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: ${Math.random() * 0.5 + 0.5};
+              }
+            }
+          `;
+
+          const style = document.createElement('style');
+          style.appendChild(document.createTextNode(keyframes));
+          document.head.appendChild(style);
+
+          particlesContainer.appendChild(particle);
+        }
+      }
+
+      // 创建金币雨效果
+      function createCoinRain() {
+        for (let i = 0; i < 30; i++) {
+          setTimeout(() => {
+            const coin = document.createElement('div');
+            coin.className = 'coin';
+            coin.style.left = Math.random() * 100 + 'vw';
+            coin.style.animationDelay = Math.random() * 0.5 + 's';
+            document.body.appendChild(coin);
+
+            // 清除金币元素
+            setTimeout(() => {
+              coin.remove();
+            }, 3000);
+          }, i * 100);
+        }
+
+        // 显示庆祝文本
+        const celebrationText = document.createElement('div');
+        celebrationText.className = 'celebration-text';
+        celebrationText.textContent = '恭喜！已赚满100元！';
+        celebrate.appendChild(celebrationText);
+
+        // 移除庆祝文本
+        setTimeout(() => {
+          celebrationText.remove();
+        }, 1500);
+      }
+
+      // 启动计时器
+      function startTimer() {
+        hourlyRate = parseFloat(hourlyRateInput.value) || 50;
+        workHours = parseFloat(workHoursInput.value) || 8;
+        totalTargetAmount = hourlyRate * workHours;
+
+        if (hourlyRate <= 0 || workHours <= 0) {
+          alert('请输入有效的时薪和工作时长');
+          return;
+        }
+
+        isRunning = true;
+        startTime = new Date();
+        lastCoinMilestone = 0;
+
+        startBtn.disabled = true;
+        stopBtn.disabled = false;
+        hourlyRateInput.disabled = true;
+        workHoursInput.disabled = true;
+
+        status.textContent = '计时中...';
+
+        updateEarnings();
+      }
+
+      // 停止计时器
+      function stopTimer() {
+        isRunning = false;
+        cancelAnimationFrame(animationFrameId);
+
+        startBtn.disabled = false;
+        stopBtn.disabled = true;
+        hourlyRateInput.disabled = false;
+        workHoursInput.disabled = false;
+
+        status.textContent = '已停止计时';
+      }
+
+      // 更新工资显示
+      function updateEarnings() {
+        if (!isRunning) return;
+
+        const now = new Date();
+        const elapsedTimeInSeconds = (now - startTime) / 1000;
+        const elapsedTimeInHours = elapsedTimeInSeconds / 3600;
+
+        // 计算当前已赚金额
+        const currentAmount = elapsedTimeInHours * hourlyRate;
+        const formattedAmount = currentAmount.toFixed(2);
+
+        // 更新进度条
+        const progress = (currentAmount / totalTargetAmount) * 100;
+        progressBar.style.width = Math.min(progress, 100) + '%';
+
+        // 检查是否达到100元里程碑
+        const currentMilestone = Math.floor(currentAmount / 100);
+        if (currentMilestone > lastCoinMilestone) {
+          lastCoinMilestone = currentMilestone;
+          createCoinRain();
+        }
+
+        // 带动画效果更新数字
+        if (currentEarnings.textContent !== '¥' + formattedAmount) {
+          currentEarnings.classList.add('digit-animation');
+          currentEarnings.textContent = '¥' + formattedAmount;
+
+          setTimeout(() => {
+            currentEarnings.classList.remove('digit-animation');
+          }, 300);
+        }
+
+        // 循环更新
+        animationFrameId = requestAnimationFrame(updateEarnings);
+      }
+
+      // 按钮事件监听
+      startBtn.addEventListener('click', startTimer);
+      stopBtn.addEventListener('click', stopTimer);
+
+      // 创建粒子背景
+      createParticles();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7DS78VMN1P"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-7DS78VMN1P');
+  </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8336276656855850" crossorigin="anonymous"></script>
+<title>Real-time Salary Tracker</title>
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+  .container {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 30px 50px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+  input {
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+  }
+  button {
+    padding: 10px 30px;
+    font-size: 18px;
+    background-color: #ff5f6d;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  button:hover {
+    background-color: #ff9966;
+  }
+  h1 {
+    font-size: 48px;
+    margin-top: 20px;
+    color: #fff;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <input type="number" id="hourlyRate" placeholder="Enter hourly rate (USD)">
+    <br>
+    <button onclick="startTracking()">Start Tracking</button>
+    <h1 id="earnings">$0.00</h1>
+  </div>
+
+<script>
+  let startTime;
+  let interval;
+
+  function startTracking() {
+    const rate = parseFloat(document.getElementById('hourlyRate').value);
+    if (isNaN(rate) || rate <= 0) {
+      alert('Please enter a valid hourly rate');
+      return;
+    }
+
+    if (interval) {
+      clearInterval(interval);
+    }
+
+    startTime = Date.now();
+
+    interval = setInterval(() => {
+      const elapsedTime = (Date.now() - startTime) / 1000 / 3600; // convert to hours
+      const earnings = (rate * elapsedTime).toFixed(2);
+      document.getElementById('earnings').innerText = `$${earnings}`;
+    }, 100);
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7DS78VMN1P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-7DS78VMN1P');
+    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8336276656855850" crossorigin="anonymous"></script>
+  <title>实时工资计算器</title>
+  <style>
+    body { font-family: 'Papyrus', fantasy; text-align: center; background-image: linear-gradient(to right, #FFD700, #FFAA00); color: #fff; overflow: hidden; }
+    h1 { font-size: 3rem; text-shadow: 3px 3px 10px #FF4500; }
+    input, button { margin: 10px; padding: 12px; font-size: 1rem; border: none; border-radius: 10px; background-color: #FFD700; color: #8B0000; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); }
+    button:hover { background-color: #FF4500; }
+    #earnings { font-size: 4rem; margin: 20px 0; text-shadow: 3px 3px 20px #FF6347; }
+    #progress { width: 80%; height: 20px; background-color: #8B0000; margin: auto; border-radius: 10px; overflow: hidden; box-shadow: 0 0 15px #FF6347; }
+    #progress-bar { height: 100%; width: 0%; background-color: #FFD700; }
+    .coin { position: fixed; width: 30px; height: 30px; animation: fall 2s linear; pointer-events: none; }
+
+    @keyframes fall {
+      0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <h1>💰 实时工资计算器 💰</h1>
+  <input type="number" id="hourlyRate" placeholder="输入时薪 (元/小时)" />
+  <input type="number" id="workHours" placeholder="输入工作时长 (小时)" />
+  <button onclick="startEarning()">开始计时</button>
+  <div id="earnings">￥0.00</div>
+  <div id="progress">
+    <div id="progress-bar"></div>
+  </div>
+  <p>⏳ 时长: <span id="timeElapsed">0:00:00</span> | 💸 每秒收入: ￥<span id="perSecond">0.00</span></p>
+
+  <script>
+    let hourlyRate = 0;
+    let workHours = 0;
+    let earnings = 0;
+    let perSecond = 0;
+    let startTime;
+    let interval;
+
+    function startEarning() {
+      hourlyRate = parseFloat(document.getElementById('hourlyRate').value) || 0;
+      workHours = parseFloat(document.getElementById('workHours').value) || 0;
+      if (hourlyRate <= 0 || workHours <= 0) {
+        alert('请输入有效的时薪和工作时长');
+        return;
+      }
+
+      perSecond = hourlyRate / 3600;
+      earnings = 0;
+      startTime = Date.now();
+
+      clearInterval(interval);
+      interval = setInterval(updateEarnings, 100);
+    }
+
+    function updateEarnings() {
+      const elapsedTime = (Date.now() - startTime) / 1000;
+      const targetEarnings = perSecond * elapsedTime;
+      earnings = targetEarnings;
+
+      document.getElementById('earnings').textContent = `￥${earnings.toFixed(2)}`;
+      document.getElementById('timeElapsed').textContent = formatTime(elapsedTime);
+      document.getElementById('perSecond').textContent = perSecond.toFixed(2);
+
+      const progress = Math.min((elapsedTime / (workHours * 3600)) * 100, 100);
+      document.getElementById('progress-bar').style.width = progress + '%';
+
+      if (Math.floor(earnings / 100) > Math.floor((earnings - perSecond) / 100)) {
+        createCoins();
+      }
+
+      if (progress >= 100) {
+        clearInterval(interval);
+      }
+    }
+
+    function formatTime(seconds) {
+      const hrs = Math.floor(seconds / 3600);
+      const mins = Math.floor((seconds % 3600) / 60);
+      const secs = Math.floor(seconds % 60);
+      return `${hrs}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    }
+
+    function createCoins() {
+      for (let i = 0; i < 20; i++) {
+        const coin = document.createElement('div');
+        coin.classList.add('coin');
+        coin.style.left = Math.random() * 100 + 'vw';
+        coin.style.animationDuration = (Math.random() * 1 + 1) + 's';
+        coin.innerHTML = '🪙';
+        document.body.appendChild(coin);
+        setTimeout(() => coin.remove(), 2000);
+      }
+    }
+  </script>
+</body>
+</html>

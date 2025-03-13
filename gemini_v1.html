@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7DS78VMN1P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-7DS78VMN1P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8336276656855850" crossorigin="anonymous"></script>
+    <title>实时工资计算器</title>
+    <style>
+        /* CSS 样式 */
+        body {
+            font-family: sans-serif;
+            background: linear-gradient(45deg, #f06, #9f6, #09f, #f90);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden; /* 避免金币溢出 */
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.9); /* 半透明白色背景 */
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .input-area {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 30px;
+        }
+
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="number"] {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        #start-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+
+        #start-btn:hover {
+            background-color: #3e8e41;
+        }
+
+        .display-area {
+            margin-top: 30px;
+        }
+
+        .salary-display {
+            font-size: 24px; /* 初始大小 */
+            font-weight: bold;
+            color: #e67e22; /* 橙色 */
+            margin-bottom: 20px;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            background-color: #ddd;
+            border-radius: 5px;
+            height: 20px;
+        }
+
+        #progress-bar {
+            height: 100%;
+            background-color: #4CAF50;
+            width: 0;
+            border-radius: 5px;
+            transition: width 0.1s linear; /* 平滑过渡 */
+        }
+
+        /* 金币样式 */
+        .coin {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-image: url('https://img.freepik.com/free-vector/realistic-golden-coin-explosion_1017-38128.jpg');
+            background-size: cover;
+            pointer-events: none; /* 不响应鼠标事件 */
+            opacity: 0; /* 默认隐藏 */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>实时工资计算器</h1>
+
+        <div class="input-area">
+            <label for="hourly-rate">时薪 (元):</label>
+            <input type="number" id="hourly-rate" placeholder="输入时薪">
+
+            <label for="work-hours">工作时长 (小时):</label>
+            <input type="number" id="work-hours" placeholder="输入工作时长">
+
+            <button id="start-btn">开始计时</button>
+        </div>
+
+        <div class="display-area">
+            <h2>当前已赚工资</h2>
+            <div class="salary-display">
+                <span id="salary">0.00</span> 元
+            </div>
+            <div class="progress-bar-container">
+                <div id="progress-bar"></div>
+            </div>
+        </div>
+
+        <div id="coin-container"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script>
+      // JavaScript 代码
+      const hourlyRateInput = document.getElementById('hourly-rate');
+      const workHoursInput = document.getElementById('work-hours');
+      const startBtn = document.getElementById('start-btn');
+      const salaryDisplay = document.getElementById('salary');
+      const progressBar = document.getElementById('progress-bar');
+      const coinContainer = document.getElementById('coin-container');
+
+      let hourlyRate = 0;
+      let workHours = 0;
+      let startTime = 0;
+      let currentSalary = 0;
+      let animationFrameId;
+      let lastSalaryCheck = 0
+
+      // 创建并添加金币元素
+      function createCoin() {
+        const coin = document.createElement('div');
+        coin.classList.add('coin');
+        coinContainer.appendChild(coin);
+
+        // 随机位置和动画
+        const startX = Math.random() * window.innerWidth;
+        const startY = -50;  // 从顶部开始
+        const duration = 3 + Math.random() * 5; // 动画时长
+
+        gsap.set(coin, { x: startX, y: startY });
+        gsap.to(coin, {
+            y: window.innerHeight + 50,
+            x: startX + (Math.random() - 0.5) * 200, // 左右随机偏移
+            rotation: 360 * (Math.random() > 0.5 ? 1 : -1), // 随机旋转
+            duration: duration,
+            ease: "power1.inOut",
+            opacity:1,
+            onComplete: () => {
+                coin.remove(); // 动画结束时移除金币
+            }
+        });
+      }
+
+      // 格式化货币
+      function formatCurrency(amount) {
+          return amount.toFixed(2);
+      }
+
+      // 更新工资和进度条
+      function updateDisplay() {
+        const elapsedTime = (Date.now() - startTime) / 1000; // 秒
+        currentSalary = hourlyRate * (elapsedTime / 3600); // 实时计算
+
+
+        // 进度条 (按比例显示)
+        const progress = (elapsedTime / (workHours * 3600)) * 100;
+        progressBar.style.width = `${Math.min(progress, 100)}%`; // 最大100%
+
+          // 金币特效 (每满100元)
+        if (currentSalary - lastSalaryCheck >= 100){
+          const numCoins = Math.floor(currentSalary - lastSalaryCheck); // 金币数量
+            for (let i = 0; i < numCoins; i++) {
+              createCoin();
+            }
+            lastSalaryCheck = currentSalary
+        }
+
+        // 使用 GSAP 更新数字
+        gsap.to(salaryDisplay, {
+            textContent: formatCurrency(currentSalary),
+            duration: 0.5,
+            ease: "power1.out",
+            snap: "textContent",
+            onUpdate: () => {
+                const size = 24 + Math.min(currentSalary / 10, 48);
+                salaryDisplay.style.fontSize = `${size}px`;
+            }
+        });
+
+        animationFrameId = requestAnimationFrame(updateDisplay);
+      }
+
+      // 开始计时
+      startBtn.addEventListener('click', () => {
+          hourlyRate = parseFloat(hourlyRateInput.value) || 0;
+          workHours = parseFloat(workHoursInput.value) || 0;
+
+          if (hourlyRate <= 0 || workHours <= 0) {
+              alert('请输入有效的时薪和工作时长！');
+              return;
+          }
+
+          startTime = Date.now();
+          lastSalaryCheck = 0;
+          cancelAnimationFrame(animationFrameId);
+          updateDisplay();
+
+          // 禁用输入框和按钮
+          hourlyRateInput.disabled = true;
+          workHoursInput.disabled = true;
+          startBtn.disabled = true;
+
+          // 按钮点击特效
+          gsap.fromTo(startBtn, {
+              scale: 1,
+              backgroundColor: "#4CAF50",
+          }, {
+              scale: 1.1,
+              backgroundColor: "#f44336",
+              duration: 0.2,
+              yoyo: true,
+              repeat: 1,
+          });
+      });
+
+    </script>
+</body>
+</html>

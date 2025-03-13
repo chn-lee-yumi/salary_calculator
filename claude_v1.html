@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7DS78VMN1P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-7DS78VMN1P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实时工资计算器</title>
+    <meta name="description" content="实时每秒工资计算器，输入时薪立即开始计时，画面流畅展示当前已赚工资，炫酷金币特效+进度条动态显示，让赚钱的每一秒都更有趣！">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8336276656855850" crossorigin="anonymous"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            color: #fff;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            background: linear-gradient(90deg, #ff6b6b, #ffc6c6, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: shine 3s linear infinite;
+        }
+
+        @keyframes shine {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        .input-container {
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 1.2em;
+            text-align: center;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            outline: none;
+        }
+
+        input:focus {
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        button {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            color: white;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 40px;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px rgba(255, 107, 107, 0.4);
+        }
+
+        button:active {
+            transform: translateY(1px);
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        button:hover::before {
+            left: 100%;
+        }
+
+        #result-container {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .coin {
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(45deg, #ffd700, #ffec8b);
+            border-radius: 50%;
+            position: absolute;
+            z-index: 2;
+            box-shadow: 0 0 10px #ffd700;
+        }
+
+        .salary-display {
+            font-size: 3em;
+            font-weight: bold;
+            margin: 20px 0;
+            transition: all 0.3s;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+            position: relative;
+        }
+
+        .currency {
+            font-size: 0.5em;
+            vertical-align: super;
+            color: #ffd700;
+        }
+
+        .status {
+            font-size: 1.2em;
+            color: #ff8e8e;
+            margin-bottom: 20px;
+        }
+
+        .info-box {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .info-item {
+            text-align: center;
+            flex: 1;
+        }
+
+        .info-label {
+            font-size: 0.9em;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .info-value {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .reset-btn {
+            background: linear-gradient(45deg, #16213e, #0f3460);
+            margin-top: 20px;
+            font-size: 1em;
+            padding: 10px 20px;
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            margin-top: 30px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, #ff6b6b, #ffd700);
+            border-radius: 5px;
+            transition: width 0.3s;
+        }
+
+        .digit {
+            display: inline-block;
+            position: relative;
+        }
+
+        .decimal-point {
+            display: inline-block;
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background-color: #ffd700;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .salary-display {
+                font-size: 2.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    <div class="container">
+        <h1>实时工资计算器</h1>
+        <div class="input-container">
+            <input type="number" id="hourlyRate" placeholder="请输入您的时薪 (元/小时)" step="0.01" min="0">
+        </div>
+        <button id="startBtn">开始计时</button>
+        <div id="result-container">
+            <p class="status">计时中...</p>
+            <div class="salary-display">
+                <span class="currency">¥</span>
+                <span id="currentSalary">0.00</span>
+            </div>
+            <div class="info-box">
+                <div class="info-item">
+                    <div class="info-label">时长</div>
+                    <div class="info-value" id="timeElapsed">00:00:00</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">时薪</div>
+                    <div class="info-value" id="rateDisplay">0.00</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">每秒收入</div>
+                    <div class="info-value" id="perSecond">0.00</div>
+                </div>
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <button class="reset-btn" id="resetBtn">重置</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化particles.js
+            particlesJS('particles-js', {
+                particles: {
+                    number: {
+                        value: 80,
+                        density: {
+                            enable: true,
+                            value_area: 800
+                        }
+                    },
+                    color: {
+                        value: ['#ff6b6b', '#ffd700', '#ffffff']
+                    },
+                    shape: {
+                        type: 'circle',
+                    },
+                    opacity: {
+                        value: 0.5,
+                        random: true,
+                    },
+                    size: {
+                        value: 3,
+                        random: true,
+                    },
+                    move: {
+                        enable: true,
+                        speed: 2,
+                        direction: 'none',
+                        random: true,
+                        out_mode: 'out',
+                    }
+                },
+                interactivity: {
+                    detect_on: 'canvas',
+                    events: {
+                        onhover: {
+                            enable: true,
+                            mode: 'grab'
+                        },
+                        onclick: {
+                            enable: true,
+                            mode: 'push'
+                        },
+                    },
+                    modes: {
+                        grab: {
+                            distance: 140,
+                            line_linked: {
+                                opacity: 0.8
+                            }
+                        },
+                        push: {
+                            particles_nb: 3
+                        }
+                    }
+                },
+                retina_detect: true
+            });
+
+            // 获取DOM元素
+            const hourlyRateInput = document.getElementById('hourlyRate');
+            const startBtn = document.getElementById('startBtn');
+            const resetBtn = document.getElementById('resetBtn');
+            const resultContainer = document.getElementById('result-container');
+            const currentSalaryDisplay = document.getElementById('currentSalary');
+            const timeElapsedDisplay = document.getElementById('timeElapsed');
+            const rateDisplay = document.getElementById('rateDisplay');
+            const perSecondDisplay = document.getElementById('perSecond');
+            const progressBar = document.getElementById('progressBar');
+            const container = document.querySelector('.container');
+
+            let startTime;
+            let salaryInterval;
+            let animationFrameId;
+            let hourlyRate = 0;
+            let secondRate = 0;
+            let currentSalary = 0;
+            let isRunning = false;
+            let lastCoinTime = 0;
+            let lastUpdateTime = 0;
+
+            // 更新进度条
+            function updateProgressBar(hour) {
+                // 假设8小时为满进度
+                const progress = Math.min((hour / 8) * 100, 100);
+                progressBar.style.width = `${progress}%`;
+            }
+
+            // 更新时间显示
+            function updateTimeDisplay(seconds) {
+                const hours = Math.floor(seconds / 3600);
+                const minutes = Math.floor((seconds % 3600) / 60);
+                const secs = seconds % 60;
+
+                const formattedHours = String(hours).padStart(2, '0');
+                const formattedMinutes = String(minutes).padStart(2, '0');
+                const formattedSeconds = String(secs).padStart(2, '0');
+
+                timeElapsedDisplay.textContent =
+                    `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+
+                updateProgressBar(seconds / 3600);
+            }
+
+            // 创建金币动画
+            function createCoin() {
+                const now = Date.now();
+                // 限制金币生成频率，避免过多
+                if (now - lastCoinTime < 300) return;
+                lastCoinTime = now;
+
+                const coin = document.createElement('div');
+                coin.classList.add('coin');
+                const salaryDisplay = document.querySelector('.salary-display');
+                const rect = salaryDisplay.getBoundingClientRect();
+
+                // 随机位置（在工资显示周围）
+                const x = rect.left + rect.width/2 - 15 + (Math.random() * 60 - 30);
+
+                coin.style.left = `${x}px`;
+                coin.style.top = `${rect.top + 20}px`;
+                document.body.appendChild(coin);
+
+                // 使用anime.js创建动画
+                anime({
+                    targets: coin,
+                    translateY: [-50, 300],
+                    translateX: {
+                        value: () => anime.random(-100, 100),
+                        easing: 'easeInOutSine'
+                    },
+                    opacity: [1, 0],
+                    scale: [1, 0.5],
+                    duration: 1500,
+                    easing: 'easeOutSine',
+                    complete: function() {
+                        coin.remove();
+                    }
+                });
+            }
+
+            // 创建数字闪光效果
+            function createSparkle() {
+                const salaryDisplay = document.querySelector('.salary-display');
+                const rect = salaryDisplay.getBoundingClientRect();
+
+                const sparkle = document.createElement('div');
+                sparkle.classList.add('sparkle');
+
+                // 随机位置（在工资显示区域内）
+                const x = rect.left + Math.random() * rect.width;
+                const y = rect.top + Math.random() * rect.height;
+
+                sparkle.style.left = `${x}px`;
+                sparkle.style.top = `${y}px`;
+                document.body.appendChild(sparkle);
+
+                // 闪光动画
+                anime({
+                    targets: sparkle,
+                    scale: [0, 1.5, 0],
+                    opacity: [0, 1, 0],
+                    duration: 1000,
+                    easing: 'easeOutQuad',
+                    complete: function() {
+                        sparkle.remove();
+                    }
+                });
+            }
+
+            // 实时更新动画函数
+            function updateSalary(timestamp) {
+                if (!isRunning) return;
+
+                const now = new Date();
+                const elapsedMs = now - startTime;
+                const elapsedSeconds = elapsedMs / 1000;
+
+                // 更新显示的时间（每秒一次）
+                if (now - lastUpdateTime >= 1000) {
+                    updateTimeDisplay(Math.floor(elapsedSeconds));
+                    lastUpdateTime = now;
+
+                    // 随机创建闪光效果
+                    if (Math.random() < 0.3) {
+                        createSparkle();
+                    }
+                }
+
+                // 计算当前工资（流畅更新）
+                currentSalary = elapsedSeconds * secondRate;
+
+                // 使用toFixed()来格式化数字，保留2位小数
+                currentSalaryDisplay.textContent = currentSalary.toFixed(2);
+
+                // 随机创建硬币特效 (适当降低频率)
+                if (elapsedMs % 1000 < 16 && Math.random() < 0.4) {
+                    createCoin();
+                }
+
+                // 继续请求动画帧
+                animationFrameId = requestAnimationFrame(updateSalary);
+            }
+
+            // 开始计时
+            startBtn.addEventListener('click', function() {
+                hourlyRate = parseFloat(hourlyRateInput.value);
+
+                if (isNaN(hourlyRate) || hourlyRate <= 0) {
+                    // 抖动动画提示用户输入有误
+                    anime({
+                        targets: hourlyRateInput,
+                        translateX: [0, -10, 10, -10, 10, 0],
+                        duration: 500,
+                        easing: 'easeInOutSine'
+                    });
+
+                    return;
+                }
+
+                if (!isRunning) {
+                    // 开始计时
+                    startTime = new Date();
+                    secondRate = hourlyRate / 3600;
+                    currentSalary = 0;
+                    lastUpdateTime = startTime;
+
+                    // 显示结果容器
+                    resultContainer.style.display = 'block';
+                    // 动画显示结果容器
+                    anime({
+                        targets: resultContainer,
+                        opacity: [0, 1],
+                        translateY: [20, 0],
+                        duration: 800,
+                        easing: 'easeOutQuad'
+                    });
+
+                    // 禁用输入框
+                    hourlyRateInput.disabled = true;
+
+                    // 更新显示
+                    rateDisplay.textContent = hourlyRate.toFixed(2);
+                    perSecondDisplay.textContent = secondRate.toFixed(4);
+
+                    // 设置按钮文本
+                    startBtn.textContent = '暂停计时';
+
+                    // 启动动画帧更新 - 使用requestAnimationFrame实现流畅动画
+                    isRunning = true;
+                    animationFrameId = requestAnimationFrame(updateSalary);
+
+                    // 创建闪耀效果
+                    anime({
+                        targets: '.salary-display',
+                        textShadow: [
+                            {value: '0 0 10px rgba(255, 215, 0, 0.7)'},
+                            {value: '0 0 20px rgba(255, 215, 0, 0.9)'},
+                            {value: '0 0 10px rgba(255, 215, 0, 0.7)'}
+                        ],
+                        duration: 2000,
+                        direction: 'alternate',
+                        loop: true,
+                        easing: 'easeInOutSine'
+                    });
+                } else {
+                    // 暂停计时
+                    isRunning = false;
+                    cancelAnimationFrame(animationFrameId);
+                    startBtn.textContent = '继续计时';
+                    document.querySelector('.status').textContent = '已暂停';
+                }
+            });
+
+            // 重置按钮
+            resetBtn.addEventListener('click', function() {
+                isRunning = false;
+                cancelAnimationFrame(animationFrameId);
+                hourlyRateInput.disabled = false;
+                startBtn.textContent = '开始计时';
+
+                // 动画隐藏结果容器
+                anime({
+                    targets: resultContainer,
+                    opacity: 0,
+                    translateY: 20,
+                    duration: 800,
+                    easing: 'easeInQuad',
+                    complete: function() {
+                        resultContainer.style.display = 'none';
+                        currentSalaryDisplay.textContent = '0.00';
+                        timeElapsedDisplay.textContent = '00:00:00';
+                        rateDisplay.textContent = '0.00';
+                        perSecondDisplay.textContent = '0.0000';
+                        progressBar.style.width = '0%';
+                        document.querySelector('.status').textContent = '计时中...';
+                    }
+                });
+            });
+
+            // 输入框文字变色动画
+            hourlyRateInput.addEventListener('focus', function() {
+                anime({
+                    targets: this,
+                    boxShadow: [
+                        '0 5px 15px rgba(0, 0, 0, 0.1)',
+                        '0 5px 15px rgba(255, 107, 107, 0.3)',
+                        '0 5px 15px rgba(0, 0, 0, 0.1)'
+                    ],
+                    duration: 2000,
+                    direction: 'alternate',
+                    loop: true,
+                    easing: 'easeInOutSine'
+                });
+            });
+
+            hourlyRateInput.addEventListener('blur', function() {
+                anime.remove(this);
+                this.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
+            });
+
+            // 容器背景动画
+            anime({
+                targets: '.container',
+                boxShadow: [
+                    '0 25px 45px rgba(0, 0, 0, 0.2)',
+                    '0 25px 45px rgba(255, 107, 107, 0.1)',
+                    '0 25px 45px rgba(0, 0, 0, 0.2)'
+                ],
+                duration: 3000,
+                direction: 'alternate',
+                loop: true,
+                easing: 'easeInOutQuad'
+            });
+        });
+    </script>
+</body>
+</html>

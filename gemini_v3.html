@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7DS78VMN1P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-7DS78VMN1P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8336276656855850" crossorigin="anonymous"></script>
+    <title>实时工资计算器</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            /* 防止滚动条 */
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 80%;
+            max-width: 600px;
+            position: relative;
+            /* 用于金币动画定位 */
+        }
+
+        /* 输入框和按钮样式 */
+        input[type="number"],
+        button {
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #388e3c;
+        }
+
+        /* 工资显示区域 */
+        #earned-wage {
+            font-size: 48px;
+            font-weight: bold;
+            color: #e67e22;
+            margin-bottom: 20px;
+        }
+
+        /* 进度条样式 */
+        .progress-bar-container {
+            width: 100%;
+            background-color: #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        #progress-bar {
+            height: 20px;
+            background-color: #4CAF50;
+            width: 0%;
+            border-radius: 5px;
+        }
+
+        /* 其他信息显示 */
+        .info-item {
+            margin: 10px 0;
+            font-size: 18px;
+            color: #333;
+        }
+
+        /* 金币动画 */
+        .coin {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: gold;
+            border-radius: 50%;
+            /* 圆形 */
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            0% {
+                top: -30px;
+                /* 从屏幕上方开始 */
+                transform: translateX(0) rotate(0deg);
+            }
+
+            100% {
+                top: 100vh;
+                /* 落到屏幕底部 */
+                transform: translateX(var(--x-offset)) rotate(var(--rotation));
+                /* 随机水平偏移和旋转 */
+            }
+        }
+        .confetti{
+            width: 10px;
+            height: 10px;
+            background-color: gold;
+            position: absolute;
+            left: 50%;
+            animation: confetti 5s ease-in-out -2s infinite;
+            transform-origin: left top;
+        }
+        @keyframes confetti {
+            0% { transform: rotateZ(15deg) rotateY(0deg) translate(0,0); }
+            25% { transform: rotateZ(5deg) rotateY(360deg) translate(-5vw,20vh); }
+            50% { transform: rotateZ(15deg) rotateY(720deg) translate(5vw,60vh); }
+            75% { transform: rotateZ(5deg) rotateY(1080deg) translate(-10vw,80vh); }
+            100% { transform: rotateZ(15deg) rotateY(1440deg) translate(10vw,110vh); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>实时工资计算器</h1>
+
+        <!-- 输入区域 -->
+        <div>
+            <label for="hourly-rate">时薪（元）：</label>
+            <input type="number" id="hourly-rate" value="50">
+            <label for="work-hours">工作时长（小时）：</label>
+            <input type="number" id="work-hours" value="8">
+            <button id="start-button">开始计时</button>
+        </div>
+
+        <!-- 工资显示 -->
+        <div id="earned-wage">0.00</div>
+
+        <!-- 进度条 -->
+        <div class="progress-bar-container">
+            <div id="progress-bar"></div>
+        </div>
+
+        <!-- 其他信息 -->
+        <div class="info-item">已工作：<span id="elapsed-time">0</span> 秒</div>
+        <div class="info-item">每秒收入：<span id="income-per-second">0.00</span> 元</div>
+    </div>
+
+    <script>
+        // 获取 DOM 元素
+        const hourlyRateInput = document.getElementById('hourly-rate');
+        const workHoursInput = document.getElementById('work-hours');
+        const startButton = document.getElementById('start-button');
+        const earnedWageDisplay = document.getElementById('earned-wage');
+        const progressBar = document.getElementById('progress-bar');
+        const elapsedTimeDisplay = document.getElementById('elapsed-time');
+        const incomePerSecondDisplay = document.getElementById('income-per-second');
+
+        // 变量
+        let startTime = null;
+        let hourlyRate = 0;
+        let workHours = 0;
+        let incomePerSecond = 0;
+        let totalSeconds = 0;
+        let earnedWage = 0;
+        let lastHundred = 0; // 上次撒金币时的工资
+        let animationFrameId = null;
+
+        // 开始计时
+        startButton.addEventListener('click', () => {
+            // 获取输入值
+            hourlyRate = parseFloat(hourlyRateInput.value);
+            workHours = parseFloat(workHoursInput.value);
+
+            if (isNaN(hourlyRate) || isNaN(workHours) || hourlyRate <= 0 || workHours <= 0) {
+                alert('请输入有效的时薪和工作时长！');
+                return;
+            }
+
+            // 计算每秒收入和总秒数
+            incomePerSecond = hourlyRate / 3600;
+            totalSeconds = workHours * 3600;
+
+            // 更新显示
+            incomePerSecondDisplay.textContent = incomePerSecond.toFixed(4);
+
+            // 重置状态
+            startTime = Date.now();
+            earnedWage = 0;
+            lastHundred = 0;
+            updateDisplay(); // 立即更新一次
+
+            // 开始动画循环
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+            }
+            animationFrameId = requestAnimationFrame(animate);
+            startButton.disabled = true;
+
+        });
+
+        // 动画循环
+        function animate() {
+            updateDisplay();
+            if (earnedWage < hourlyRate * workHours) {
+                animationFrameId = requestAnimationFrame(animate);
+            } else {
+                startButton.disabled = false;
+            }
+        }
+
+        // 更新显示
+        function updateDisplay() {
+            const now = Date.now();
+            const elapsedSeconds = (now - startTime) / 1000;
+
+            // 如果超出预设工作时长，则停止
+            if (elapsedSeconds >= totalSeconds) {
+                earnedWage = hourlyRate * workHours; // 最终工资
+                elapsedTimeDisplay.textContent = totalSeconds.toFixed(0);
+                progressBar.style.width = '100%';
+                cancelAnimationFrame(animationFrameId); // 停止动画
+                return;
+            }
+
+            // 计算当前工资
+            earnedWage = elapsedSeconds * incomePerSecond;
+
+            // 更新 UI
+            earnedWageDisplay.textContent = earnedWage.toFixed(2);
+            elapsedTimeDisplay.textContent = elapsedSeconds.toFixed(0);
+            progressBar.style.width = `${(elapsedSeconds / totalSeconds) * 100}%`;
+
+            // 检查是否需要撒金币
+            checkCoinDrop();
+            checkConfetti();
+        }
+
+        // 撒金币
+        function checkCoinDrop() {
+            const currentHundred = Math.floor(earnedWage / 100);
+
+            if (currentHundred > lastHundred) {
+                lastHundred = currentHundred;
+                dropCoins(currentHundred - lastHundred);
+            }
+            if (earnedWage % 100 >= 99.99 && earnedWage % 100 < 100)
+            {
+                dropCoins(10);
+            }
+        }
+
+        function dropCoins(count) {
+            const container = document.querySelector('.container');
+            for (let i = 0; i < count*5; i++) {
+                const coin = document.createElement('div');
+                coin.classList.add('coin');
+
+                // 随机位置和动画延迟
+                const x = Math.random() * container.offsetWidth; // 容器宽度内
+                const delay = Math.random() * 2; // 动画延迟，错开下落时间
+                const xOffset = (Math.random() - 0.5) * 200; // 水平偏移
+                const rotation = Math.random() * 360;      // 旋转角度
+
+                coin.style.left = `${x}px`;
+                coin.style.animationDelay = `${delay}s`;
+                coin.style.setProperty('--x-offset', `${xOffset}px`); // 使用 CSS 变量
+                coin.style.setProperty('--rotation', `${rotation}deg`);
+
+                container.appendChild(coin);
+
+                // 动画结束后移除金币元素
+                coin.addEventListener('animationend', () => {
+                    coin.remove();
+                });
+            }
+        }
+        function checkConfetti(){
+            const currentHundred = Math.floor(earnedWage / 100);
+
+            if (currentHundred > lastHundred) {
+                lastHundred = currentHundred;
+                sprinkleConfetti(currentHundred - lastHundred);
+            }
+            if (earnedWage % 100 >= 99.99 && earnedWage % 100 < 100)
+            {
+                sprinkleConfetti(10);
+            }
+        }
+        function sprinkleConfetti(count){
+            const container = document.querySelector('.container');
+            for(let i = 0; i < count*5;i++){
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                container.appendChild(confetti);
+                const hue = Math.random() * 360;
+                const color = `hsl(${hue},90%,70%)`;
+
+                confetti.style.backgroundColor = color;
+                // 动画结束后移除金币元素
+                confetti.addEventListener('animationend', () => {
+                    confetti.remove();
+                });
+            }
+
+        }
+    </script>
+</body>
+
+</html>

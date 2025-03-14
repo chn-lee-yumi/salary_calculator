@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实时工资计算器</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(45deg, #007BFF 0%, #00FF7F 30%, #FFD700 60%, #FF6347 100%);
+            background-size: 200% 200%;
+            animation: gradient 15s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            text-align: center;
+            width: 80%;
+            max-width: 500px;
+        }
+
+        input {
+            padding: 15px;
+            margin: 10px;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+            font-size: 16px;
+            width: calc(100% - 20px);
+            transition: all 0.3s ease;
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        button {
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #007BFF, #00FF7F);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px 0 rgba(0, 123, 255, 0.75);
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px 0 rgba(0, 123, 255, 0.9);
+        }
+
+        #display {
+            font-size: 32px;
+            margin: 30px 0;
+            color: white;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        #progress {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        #progress-bar {
+            width: 0%;
+            height: 30px;
+            background: linear-gradient(135deg, #00FF7F, #FFD700);
+            border-radius: 15px;
+            text-align: center;
+            line-height: 30px;
+            color: white;
+            transition: width 0.5s ease;
+        }
+
+        #duration,
+        #per-second {
+            font-size: 18px;
+            color: white;
+            margin: 10px 0;
+        }
+
+        .coin {
+            width: 20px;
+            height: 20px;
+            background-image: url('https://dummyimage.com/20x20/ffd700/000000');
+            background-size: cover;
+            position: absolute;
+            animation: fall 3s linear;
+        }
+
+        @keyframes fall {
+            0% {
+                top: -20px;
+            }
+
+            100% {
+                top: 100vh;
+            }
+        }
+
+        .star {
+            width: 5px;
+            height: 5px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            animation: twinkle 3s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% {
+                opacity: 0.2;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>实时工资计算器<h1>实时工资计算器</h1>
+        <input type="number" id="hourly-rate" placeholder="时薪">
+        <input type="number" id="working-hours" placeholder="工作时长（小时）">
+        <button id="start-button">开始计时</button>
+        <div id="display">已赚工资: $0.00</div>
+        <div id="progress">
+            <div id="progress-bar">0%</div>
+        </div>
+        <div id="duration">时长: 0:00:00</div>
+        <div id="per-second">每秒收入: $0.00</div>
+        <button id="share-button">分享此页面</button>
+    </div>
+    <script>
+        for (let i = 0; i < 50; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            star.style.left = `${Math.random() * 100}vw`;
+            star.style.top = `${Math.random() * 100}vh`;
+            document.body.appendChild(star);
+        }
+
+        const hourlyRateInput = document.getElementById('hourly-rate');
+        const workingHoursInput = document.getElementById('working-hours');
+        const startButton = document.getElementById('start-button');
+        const display = document.getElementById('display');
+        const progressBar = document.getElementById('progress-bar');
+        const durationDisplay = document.getElementById('duration');
+        const perSecondDisplay = document.getElementById('per-second');
+        const shareButton = document.getElementById('share-button');
+        let startTime;
+        let totalSeconds = 0;
+        let totalEarnings = 0;
+        let animationFrame;
+
+        startButton.addEventListener('click', () => {
+            const hourlyRate = parseFloat(hourlyRateInput.value);
+            const workingHours = parseFloat(workingHoursInput.value);
+
+            if (isNaN(hourlyRate) || isNaN(workingHours)) {
+                alert('请输入有效的时薪和工作时长！');
+                return;
+            }
+
+            const perSecondEarnings = hourlyRate / 3600;
+            perSecondDisplay.textContent = `每秒收入: $${perSecondEarnings.toFixed(2)}`;
+
+            startTime = Date.now();
+            function update() {
+                const currentTime = Date.now();
+                const elapsedTime = (currentTime - startTime) / 1000;
+                totalSeconds = Math.floor(elapsedTime);
+                totalEarnings = perSecondEarnings * totalSeconds;
+                display.textContent = `已赚工资: $${totalEarnings.toFixed(2)}`;
+
+                const formattedElapsedTime = new Date(totalSeconds * 1000).toISOString().substr(11, 8);
+                durationDisplay.textContent = `时长: ${formattedElapsedTime}`;
+
+                const progress = (totalEarnings / (hourlyRate * workingHours)) * 100;
+                progressBar.style.width = `${Math.min(progress, 100)}%`;
+                progressBar.textContent = `${Math.min(progress, 100).toFixed(2)}%`;
+
+                if (Math.floor(totalEarnings / 100) > Math.floor((totalEarnings - perSecondEarnings) / 100)) {
+                    rainCoins();
+                }
+
+                if (totalEarnings < hourlyRate * workingHours) {
+                    animationFrame = requestAnimationFrame(update);
+                }
+            }
+            animationFrame = requestAnimationFrame(update);
+        });
+
+        function rainCoins() {
+            for (let i = 0; i < 50; i++) {
+                const coin = document.createElement('div');
+                coin.classList.add('coin');
+                coin.style.left = `${Math.random() * 100}vw`;
+                document.body.appendChild(coin);
+                setTimeout(() => {
+                    coin.remove();
+                }, 3000);
+            }
+        }
+
+        shareButton.addEventListener('click', async () => {
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: '实时工资计算器',
+                        text: '快来使用实时工资计算器，看看你能赚多少钱！',
+                        url: window.location.href
+                    });
+                } catch (error) {
+                    console.error('分享失败:', error);
+                }
+            } else {
+                const tempInput = document.createElement('input');
+                tempInput.value = window.location.href;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand('copy');
+                document.body.removeChild(tempInput);
+                alert('你的浏览器不支持直接分享，已复制链接到剪贴板。');
+            }
+        });
+    </script>
+</body>
+
+</html>    

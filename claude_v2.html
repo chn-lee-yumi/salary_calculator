@@ -248,6 +248,28 @@
       70% { transform: scale(1.2); opacity: 1; }
       100% { transform: scale(1); opacity: 0; }
     }
+
+    .home-link {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 500;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+    .home-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+    .home-link:active {
+      transform: translateY(1px);
+    }
   </style>
 </head>
 <body>
@@ -282,6 +304,8 @@
   </div>
 
   <div class="celebrate" id="celebrate"></div>
+
+  <a href="index.html" class="home-link">返回主页</a>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {

@@ -131,10 +131,70 @@
             transition: transform 0.3s, box-shadow 0.3s;
             cursor: pointer;
             border: 1px solid #e0e0e0;
+            position: relative;
         }
         .card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        .rank-badge {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+            color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .rank-1 {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            border: 2px solid #FFD700;
+        }
+        .rank-2 {
+            background: linear-gradient(135deg, #C0C0C0, #A0A0A0);
+            border: 2px solid #C0C0C0;
+        }
+        .rank-3 {
+            background: linear-gradient(135deg, #CD7F32, #B8860B);
+            border: 2px solid #CD7F32;
+        }
+        .rank-other {
+            background: linear-gradient(135deg, #6c757d, #495057);
+            border: 2px solid #6c757d;
+        }
+        .hot-label {
+            position: absolute;
+            top: -10px;
+            left: 25px;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+            box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
+            z-index: 10;
+        }
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 4px 12px rgba(255, 107, 107, 0.5);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
+            }
         }
         .card-icon {
             width: 60px;
@@ -192,16 +252,10 @@
 
         <div class="grid">
             <!-- ChatGPT Cards -->
-            <a href="chatgpt_v1.html" style="text-decoration: none; color: inherit;">
-                <div class="card">
-                    <div class="card-icon chatgpt">GPT</div>
-                    <h2>ChatGPT 初版</h2>
-                    <p>OpenAI ChatGPT</p>
-                </div>
-            </a>
-
             <a href="chatgpt_v3.html" style="text-decoration: none; color: inherit;">
                 <div class="card">
+                    <div class="rank-badge rank-1">1</div>
+                    <div class="hot-label">最热门</div>
                     <div class="card-icon chatgpt">GPT</div>
                     <h2>ChatGPT 终版</h2>
                     <p>OpenAI ChatGPT</p>
@@ -209,26 +263,11 @@
             </a>
 
             <!-- Claude Cards -->
-            <a href="claude_v1.html" style="text-decoration: none; color: inherit;">
-                <div class="card">
-                    <div class="card-icon claude">C</div>
-                    <h2>Claude 初版</h2>
-                    <p>Anthropic Claude</p>
-                </div>
-            </a>
-
             <a href="claude_v2.html" style="text-decoration: none; color: inherit;">
                 <div class="card">
+                    <div class="rank-badge rank-2">2</div>
                     <div class="card-icon claude">C</div>
                     <h2>Claude 再版</h2>
-                    <p>Anthropic Claude</p>
-                </div>
-            </a>
-
-            <a href="claude_v3.html" style="text-decoration: none; color: inherit;">
-                <div class="card">
-                    <div class="card-icon claude">C</div>
-                    <h2>Claude 终版</h2>
                     <p>Anthropic Claude</p>
                 </div>
             </a>
@@ -236,25 +275,55 @@
             <!-- DeepSeek Card -->
             <a href="deepseek_v3.html" style="text-decoration: none; color: inherit;">
                 <div class="card">
+                    <div class="rank-badge rank-3">3</div>
                     <div class="card-icon deepseek">D</div>
                     <h2>DeepSeek 终版</h2>
                     <p>DeepSeek R1</p>
                 </div>
             </a>
 
-            <!-- Gemini Cards -->
-            <a href="gemini_v1.html" style="text-decoration: none; color: inherit;">
+            <a href="claude_v3.html" style="text-decoration: none; color: inherit;">
                 <div class="card">
+                    <div class="rank-badge rank-other">4</div>
+                    <div class="card-icon claude">C</div>
+                    <h2>Claude 终版</h2>
+                    <p>Anthropic Claude</p>
+                </div>
+            </a>
+
+            <!-- Gemini Cards -->
+            <a href="gemini_v3.html" style="text-decoration: none; color: inherit;">
+                <div class="card">
+                    <div class="rank-badge rank-other">5</div>
                     <div class="card-icon gemini">G</div>
-                    <h2>Gemini 初版</h2>
+                    <h2>Gemini 终版</h2>
                     <p>Google Gemini</p>
                 </div>
             </a>
 
-            <a href="gemini_v3.html" style="text-decoration: none; color: inherit;">
+            <a href="chatgpt_v1.html" style="text-decoration: none; color: inherit;">
                 <div class="card">
+                    <div class="rank-badge rank-other">6</div>
+                    <div class="card-icon chatgpt">GPT</div>
+                    <h2>ChatGPT 初版</h2>
+                    <p>OpenAI ChatGPT</p>
+                </div>
+            </a>
+
+            <a href="claude_v1.html" style="text-decoration: none; color: inherit;">
+                <div class="card">
+                    <div class="rank-badge rank-other">7</div>
+                    <div class="card-icon claude">C</div>
+                    <h2>Claude 初版</h2>
+                    <p>Anthropic Claude</p>
+                </div>
+            </a>
+
+            <a href="gemini_v1.html" style="text-decoration: none; color: inherit;">
+                <div class="card">
+                    <div class="rank-badge rank-other">8</div>
                     <div class="card-icon gemini">G</div>
-                    <h2>Gemini 终版</h2>
+                    <h2>Gemini 初版</h2>
                     <p>Google Gemini</p>
                 </div>
             </a>

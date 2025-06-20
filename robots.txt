@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://salary.gcc.ac.cn/sitemap.txt
+
+# Crawl-delay
+Crawl-delay: 1 

@@ -1,0 +1,9 @@
+https://salary.gcc.ac.cn/
+https://salary.gcc.ac.cn/chatgpt_v1.html
+https://salary.gcc.ac.cn/chatgpt_v3.html
+https://salary.gcc.ac.cn/claude_v1.html
+https://salary.gcc.ac.cn/claude_v2.html
+https://salary.gcc.ac.cn/claude_v3.html
+https://salary.gcc.ac.cn/deepseek_v3.html
+https://salary.gcc.ac.cn/gemini_v1.html
+https://salary.gcc.ac.cn/gemini_v3.html 

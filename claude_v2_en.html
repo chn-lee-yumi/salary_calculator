@@ -1,45 +1,45 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <!-- SEO Meta Tags -->
-    <title>Claude再版 - 实时工资计算器 | 渐变背景版本</title>
-    <meta name="description" content="Claude再版实时工资计算器，炫酷渐变背景动画，输入时薪立即开始计时，画面流畅展示当前已赚工资，让赚钱的每一秒都更有趣！">
-    <meta name="keywords" content="Claude,工资计算器,实时工资,时薪计算,收入跟踪,薪资计算,工作收入,AI工具,渐变背景,动画效果">
+    <title>Claude Iteration 2 - Real-time Salary Calculator | Gradient Background Edition</title>
+    <meta name="description" content="Claude Iteration 2 real-time salary calculator with animated gradient background and smooth earnings display.">
+    <meta name="keywords" content="Claude,salary calculator,real-time earnings,hourly wage tracker,animated gradient">
     <meta name="author" content="Yumi">
     <meta name="robots" content="index, follow">
-    
+
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://salary.gcc.ac.cn/claude_v2.html">
-    
+    <link rel="canonical" href="https://salary.gcc.ac.cn/claude_v2_en.html">
+
     <!-- Language Alternates -->
-    <link rel="alternate" hreflang="zh-CN" href="https://salary.gcc.ac.cn/claude_v2.html">
+    <link rel="alternate" hreflang="en" href="https://salary.gcc.ac.cn/claude_v2_en.html">
     <link rel="alternate" hreflang="en" href="https://salary.gcc.ac.cn/claude_v2_en.html">
     <link rel="alternate" hreflang="x-default" href="https://salary.gcc.ac.cn/claude_v2_en.html">
 
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Claude再版 - 实时工资计算器 | 渐变背景版本">
-    <meta property="og:description" content="Claude再版实时工资计算器，炫酷渐变背景动画，输入时薪立即开始计时，画面流畅展示当前已赚工资，让赚钱的每一秒都更有趣！">
-    <meta property="og:url" content="https://salary.gcc.ac.cn/claude_v2.html">
-    <meta property="og:site_name" content="实时工资计算器">
-    <meta property="og:locale" content="zh_CN">
+    <meta property="og:title" content="Claude Iteration 2 - Real-time Salary Calculator | Gradient Background Edition">
+    <meta property="og:description" content="Claude Iteration 2 real-time salary calculator with animated gradient background and smooth earnings display.">
+    <meta property="og:url" content="https://salary.gcc.ac.cn/claude_v2_en.html">
+    <meta property="og:site_name" content="Real-time Salary Calculator">
+    <meta property="og:locale" content="en_US">
     <meta property="og:type" content="website">
     <!-- <meta property="og:image" content="https://salary.gcc.ac.cn/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630"> -->
-    
+
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Claude再版 - 实时工资计算器 | 渐变背景版本">
-    <meta name="twitter:description" content="Claude再版实时工资计算器，炫酷渐变背景动画，输入时薪立即开始计时，画面流畅展示当前已赚工资，让赚钱的每一秒都更有趣！">
+    <meta name="twitter:title" content="Claude Iteration 2 - Real-time Salary Calculator | Gradient Background Edition">
+    <meta name="twitter:description" content="Claude Iteration 2 real-time salary calculator with animated gradient background and smooth earnings display.">
     <!-- <meta name="twitter:image" content="https://salary.gcc.ac.cn/og-image.png"> -->
-    
+
     <!-- Additional Meta Tags -->
     <meta name="theme-color" content="#7e22ce">
     <meta name="msapplication-TileColor" content="#7e22ce">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="实时工资计算器">
-    
+    <meta name="apple-mobile-web-app-title" content="Real-time Salary Calculator">
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-7DS78VMN1P"></script>
     <script>
@@ -52,8 +52,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8336276656855850" crossorigin="anonymous"></script>
-  <title>实时工资计算器</title>
-  <meta name="description" content="实时每秒工资计算器，输入时薪立即开始计时，画面流畅展示当前已赚工资，炫酷金币特效+进度条动态显示，让赚钱的每一秒都更有趣！">
+  <title>Real-time Salary Calculator</title>
+  <meta name="description" content="Real-time per-second salary calculator. Enter your hourly rate to start tracking instantly with smooth earning display, coin effects, and animated progress.">
   <style>
     body {
       margin: 0;
@@ -315,36 +315,36 @@
   <div class="particles-container"></div>
 
   <div class="container">
-    <h1>实时工资计算器</h1>
+    <h1>Real-time Salary Calculator</h1>
 
     <div class="input-group">
-      <label for="hourlyRate">时薪 (元/小时):</label>
+      <label for="hourlyRate">Hourly rate (USD/hour):</label>
       <input type="number" id="hourlyRate" min="0" step="0.01" value="50">
     </div>
 
     <div class="input-group">
-      <label for="workHours">工作时长 (小时):</label>
+      <label for="workHours">Work duration (hours):</label>
       <input type="number" id="workHours" min="0" step="0.1" value="8">
     </div>
 
-    <button id="startBtn">开始计时</button>
-    <button id="stopBtn" disabled>停止计时</button>
+    <button id="startBtn">Start Tracking</button>
+    <button id="stopBtn" disabled>Stop Tracking</button>
 
     <div class="earnings-display">
-      <h2>当前已赚取工资</h2>
-      <div id="currentEarnings">¥0.00</div>
+      <h2>Current Earnings</h2>
+      <div id="currentEarnings">$0.00</div>
 
       <div class="progress-container">
         <div class="progress-bar" id="progressBar"></div>
       </div>
 
-      <div class="status" id="status">等待开始计时...</div>
+      <div class="status" id="status">Waiting to start...</div>
     </div>
   </div>
 
   <div class="celebrate" id="celebrate"></div>
 
-  <a href="index.html" class="home-link">返回主页</a>
+  <a href="index_en.html" class="home-link">Back to Home</a>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -434,7 +434,7 @@
         // 显示庆祝文本
         const celebrationText = document.createElement('div');
         celebrationText.className = 'celebration-text';
-        celebrationText.textContent = '恭喜！已赚满100元！';
+        celebrationText.textContent = 'Congrats! You have earned $100!';
         celebrate.appendChild(celebrationText);
 
         // 移除庆祝文本
@@ -450,7 +450,7 @@
         totalTargetAmount = hourlyRate * workHours;
 
         if (hourlyRate <= 0 || workHours <= 0) {
-          alert('请输入有效的时薪和工作时长');
+          alert('请输入有效的时薪和工作Elapsed');
           return;
         }
 
@@ -463,12 +463,12 @@
         hourlyRateInput.disabled = true;
         workHoursInput.disabled = true;
 
-        status.textContent = '计时中...';
+        status.textContent = 'Tracking...';
 
         updateEarnings();
       }
 
-      // 停止计时器
+      // Stop Tracking器
       function stopTimer() {
         isRunning = false;
         cancelAnimationFrame(animationFrameId);
@@ -478,7 +478,7 @@
         hourlyRateInput.disabled = false;
         workHoursInput.disabled = false;
 
-        status.textContent = '已停止计时';
+        status.textContent = '已Stop Tracking';
       }
 
       // 更新工资显示
@@ -505,9 +505,9 @@
         }
 
         // 带动画效果更新数字
-        if (currentEarnings.textContent !== '¥' + formattedAmount) {
+        if (currentEarnings.textContent !== '$' + formattedAmount) {
           currentEarnings.classList.add('digit-animation');
-          currentEarnings.textContent = '¥' + formattedAmount;
+          currentEarnings.textContent = '$' + formattedAmount;
 
           setTimeout(() => {
             currentEarnings.classList.remove('digit-animation');
@@ -528,3 +528,4 @@
   </script>
 </body>
 </html>
+

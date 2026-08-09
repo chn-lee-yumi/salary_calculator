@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://salary.gcc.ac.cn/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://salary.gcc.ac.cn/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://salary.gcc.ac.cn/index_en.html"/>
+  </url>
+  <url>
+    <loc>https://salary.gcc.ac.cn/index_en.html</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://salary.gcc.ac.cn/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://salary.gcc.ac.cn/index_en.html"/>
+  </url>
+  <url><loc>https://salary.gcc.ac.cn/chatgpt_v1.html</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="https://salary.gcc.ac.cn/chatgpt_v1.html"/><xhtml:link rel="alternate" hreflang="en" href="https://salary.gcc.ac.cn/chatgpt_v1_en.html"/></url>
+  <url><loc>https://salary.gcc.ac.cn/chatgpt_v1_en.html</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="https://salary.gcc.ac.cn/chatgpt_v1.html"/><xhtml:link rel="alternate" hreflang="en" href="https://salary.gcc.ac.cn/chatgpt_v1_en.html"/></url>
+  <url><loc>https://salary.gcc.ac.cn/chatgpt_v3.html</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="https://salary.gcc.ac.cn/chatgpt_v3.html"/><xhtml:link rel="alternate" hreflang="en" href="https://salary.gcc.ac.cn/chatgpt_v3_en.html"/></url>
+  <url><loc>https://salary.gcc.ac.cn/chatgpt_v3_en.html</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="https://salary.gcc.ac.cn/chatgpt_v3.html"/><xhtml:link rel="alternate" hreflang="en" href="https://salary.gcc.ac.cn/chatgpt_v3_en.html"/></url>
+  <url><loc>https://salary.gcc.ac.cn/claude_v1.html</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="https://salary.gcc.ac.cn/claude_v1.html"/><xhtml:link rel="alternate" hreflang="en" href="https://salary.gcc.ac.cn/claude_v1_en.html"/></url>
+  <url><loc>https://salary.gcc.ac.cn/claude_v1_en.html</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="https://salary.gcc.ac.cn/claude_v1.html"/><xhtml:link rel="alternate" hreflang="en" href="https://salary.gcc.ac.cn/claude_v1_en.html"/></url>
+  <url><loc>https://salary.gcc.ac.cn/claude_v2.html</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="https://salary.gcc.ac.cn/claude_v2.html"/><xhtml:link rel="alternate" hreflang="en" href="https://salary.gcc.ac.cn/claude_v2_en.html"/></url>
+  <url><loc>https://salary.gcc.ac.cn/claude_v2_en.html</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="https://salary.gcc.ac.cn/claude_v2.html"/><xhtml:link rel="alternate" hreflang="en" href="https://salary.gcc.ac.cn/claude_v2_en.html"/></url>
+  <url><loc>https://salary.gcc.ac.cn/claude_v3.html</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="https://salary.gcc.ac.cn/claude_v3.html"/><xhtml:link rel="alternate" hreflang="en" href="https://salary.gcc.ac.cn/claude_v3_en.html"/></url>
+  <url><loc>https://salary.gcc.ac.cn/claude_v3_en.html</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="https://salary.gcc.ac.cn/claude_v3.html"/><xhtml:link rel="alternate" hreflang="en" href="https://salary.gcc.ac.cn/claude_v3_en.html"/></url>
+  <url><loc>https://salary.gcc.ac.cn/deepseek_v3.html</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="https://salary.gcc.ac.cn/deepseek_v3.html"/><xhtml:link rel="alternate" hreflang="en" href="https://salary.gcc.ac.cn/deepseek_v3_en.html"/></url>
+  <url><loc>https://salary.gcc.ac.cn/deepseek_v3_en.html</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="https://salary.gcc.ac.cn/deepseek_v3.html"/><xhtml:link rel="alternate" hreflang="en" href="https://salary.gcc.ac.cn/deepseek_v3_en.html"/></url>
+  <url><loc>https://salary.gcc.ac.cn/gemini_v1.html</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="https://salary.gcc.ac.cn/gemini_v1.html"/><xhtml:link rel="alternate" hreflang="en" href="https://salary.gcc.ac.cn/gemini_v1_en.html"/></url>
+  <url><loc>https://salary.gcc.ac.cn/gemini_v1_en.html</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="https://salary.gcc.ac.cn/gemini_v1.html"/><xhtml:link rel="alternate" hreflang="en" href="https://salary.gcc.ac.cn/gemini_v1_en.html"/></url>
+  <url><loc>https://salary.gcc.ac.cn/gemini_v3.html</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="https://salary.gcc.ac.cn/gemini_v3.html"/><xhtml:link rel="alternate" hreflang="en" href="https://salary.gcc.ac.cn/gemini_v3_en.html"/></url>
+  <url><loc>https://salary.gcc.ac.cn/gemini_v3_en.html</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="https://salary.gcc.ac.cn/gemini_v3.html"/><xhtml:link rel="alternate" hreflang="en" href="https://salary.gcc.ac.cn/gemini_v3_en.html"/></url>
+</urlset>
+

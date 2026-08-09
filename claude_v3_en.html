@@ -1,45 +1,45 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <!-- SEO Meta Tags -->
-    <title>Claude终版 - 实时工资计算器 | 专业完善版本</title>
-    <meta name="description" content="Claude终版实时工资计算器，专业完善的界面设计，支持多种输入方式，实时显示收入进度和金币特效，让工作更有成就感！">
-    <meta name="keywords" content="Claude,工资计算器,实时工资,时薪计算,收入跟踪,薪资计算,工作收入,AI工具,终版,专业版">
+    <title>Claude Final - Real-time Salary Calculator | Professional Edition</title>
+    <meta name="description" content="Claude Final real-time salary calculator with polished UI, progress metrics, and coin effects.">
+    <meta name="keywords" content="Claude,salary calculator,real-time earnings,hourly wage tracker,professional edition">
     <meta name="author" content="Yumi">
     <meta name="robots" content="index, follow">
-    
+
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://salary.gcc.ac.cn/claude_v3.html">
-    
+    <link rel="canonical" href="https://salary.gcc.ac.cn/claude_v3_en.html">
+
     <!-- Language Alternates -->
-    <link rel="alternate" hreflang="zh-CN" href="https://salary.gcc.ac.cn/claude_v3.html">
+    <link rel="alternate" hreflang="en" href="https://salary.gcc.ac.cn/claude_v3_en.html">
     <link rel="alternate" hreflang="en" href="https://salary.gcc.ac.cn/claude_v3_en.html">
     <link rel="alternate" hreflang="x-default" href="https://salary.gcc.ac.cn/claude_v3_en.html">
 
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Claude终版 - 实时工资计算器 | 专业完善版本">
-    <meta property="og:description" content="Claude终版实时工资计算器，专业完善的界面设计，支持多种输入方式，实时显示收入进度和金币特效，让工作更有成就感！">
-    <meta property="og:url" content="https://salary.gcc.ac.cn/claude_v3.html">
-    <meta property="og:site_name" content="实时工资计算器">
-    <meta property="og:locale" content="zh_CN">
+    <meta property="og:title" content="Claude Final - Real-time Salary Calculator | Professional Edition">
+    <meta property="og:description" content="Claude Final real-time salary calculator with polished UI, progress metrics, and coin effects.">
+    <meta property="og:url" content="https://salary.gcc.ac.cn/claude_v3_en.html">
+    <meta property="og:site_name" content="Real-time Salary Calculator">
+    <meta property="og:locale" content="en_US">
     <meta property="og:type" content="website">
     <!-- <meta property="og:image" content="https://salary.gcc.ac.cn/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630"> -->
-    
+
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Claude终版 - 实时工资计算器 | 专业完善版本">
-    <meta name="twitter:description" content="Claude终版实时工资计算器，专业完善的界面设计，支持多种输入方式，实时显示收入进度和金币特效，让工作更有成就感！">
+    <meta name="twitter:title" content="Claude Final - Real-time Salary Calculator | Professional Edition">
+    <meta name="twitter:description" content="Claude Final real-time salary calculator with polished UI, progress metrics, and coin effects.">
     <!-- <meta name="twitter:image" content="https://salary.gcc.ac.cn/og-image.png"> -->
-    
+
     <!-- Additional Meta Tags -->
     <meta name="theme-color" content="#7e22ce">
     <meta name="msapplication-TileColor" content="#7e22ce">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="实时工资计算器">
-    
+    <meta name="apple-mobile-web-app-title" content="Real-time Salary Calculator">
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-7DS78VMN1P"></script>
     <script>
@@ -203,7 +203,7 @@
         }
 
         .salary-display::before {
-            content: '¥';
+            content: '$';
             font-size: 30px;
             vertical-align: top;
             margin-right: 5px;
@@ -287,7 +287,7 @@
         }
 
         .coin::before {
-            content: '¥';
+            content: '$';
             position: absolute;
             top: 50%;
             left: 50%;
@@ -391,21 +391,21 @@
     <div class="particles" id="particles"></div>
 
     <div class="container">
-        <h1>实时工资计算器</h1>
+        <h1>Real-time Salary Calculator</h1>
 
         <div class="input-section">
             <div class="input-group">
-                <label for="hourlyRate">时薪 (元/小时)</label>
-                <input type="number" id="hourlyRate" min="0" step="0.01" placeholder="请输入时薪" value="100">
+                <label for="hourlyRate">Hourly rate (USD/hour)</label>
+                <input type="number" id="hourlyRate" min="0" step="0.01" placeholder="Please enter hourly rate" value="100">
             </div>
 
             <div class="input-group">
-                <label for="workHours">工作时长 (小时)</label>
-                <input type="number" id="workHours" min="0" step="0.5" placeholder="请输入工作时长" value="8">
+                <label for="workHours">Work duration (hours)</label>
+                <input type="number" id="workHours" min="0" step="0.5" placeholder="Please enter work duration" value="8">
             </div>
         </div>
 
-        <button id="startBtn">开始计时</button>
+        <button id="startBtn">Start Tracking</button>
 
         <div class="display-section">
             <div class="salary-display" id="salary">0.00</div>
@@ -416,18 +416,18 @@
 
             <div class="stats">
                 <div class="stat-item">
-                    <div class="stat-label">已工作时间</div>
+                    <div class="stat-label">Time worked</div>
                     <div class="stat-value" id="timeWorked">00:00:00</div>
                 </div>
 
                 <div class="stat-item">
-                    <div class="stat-label">每秒收入</div>
+                    <div class="stat-label">Income per second</div>
                     <div class="stat-value" id="perSecond">0.00</div>
                 </div>
 
                 <div class="stat-item">
-                    <div class="stat-label">下一目标</div>
-                    <div class="stat-value" id="nextTarget">¥100</div>
+                    <div class="stat-label">Next target</div>
+                    <div class="stat-value" id="nextTarget">$100</div>
                 </div>
             </div>
         </div>
@@ -435,7 +435,7 @@
 
     <div class="coins-container" id="coinsContainer"></div>
 
-    <a href="index.html" class="home-link">返回主页</a>
+    <a href="index_en.html" class="home-link">Back to Home</a>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -486,12 +486,12 @@
 
             startBtn.addEventListener('click', () => {
                 if (!isRunning) {
-                    // 开始计时
+                    // Start Tracking
                     const hourlyRate = parseFloat(hourlyRateInput.value) || 0;
                     const workHours = parseFloat(workHoursInput.value) || 0;
 
                     if (hourlyRate <= 0 || workHours <= 0) {
-                        alert('请输入有效的时薪和工作时长');
+                        alert('Please enter a valid hourly rate and work duration');
                         return;
                     }
 
@@ -502,19 +502,19 @@
                     perSecond = hourlyRate / 3600;
                     nextCoinMilestone = 100;
 
-                    startBtn.textContent = '停止计时';
+                    startBtn.textContent = 'Stop Tracking';
                     hourlyRateInput.disabled = true;
                     workHoursInput.disabled = true;
 
-                    // 更新显示的每秒收入
+                    // 更新显示的Income per second
                     perSecondDisplay.textContent = perSecond.toFixed(2);
 
                     // 开始动画循环
                     animationFrameId = requestAnimationFrame(updateSalary);
                 } else {
-                    // 停止计时
+                    // Stop Tracking
                     isRunning = false;
-                    startBtn.textContent = '开始计时';
+                    startBtn.textContent = 'Start Tracking';
                     hourlyRateInput.disabled = false;
                     workHoursInput.disabled = false;
 
@@ -538,7 +538,7 @@
                 if (currentSalary > targetSalary) {
                     currentSalary = targetSalary;
                     isRunning = false;
-                    startBtn.textContent = '开始计时';
+                    startBtn.textContent = 'Start Tracking';
                     hourlyRateInput.disabled = false;
                     workHoursInput.disabled = false;
                 }
@@ -559,8 +559,8 @@
                 const seconds = Math.floor(elapsedSeconds % 60);
                 timeWorkedDisplay.textContent = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 
-                // 更新下一目标显示
-                nextTargetDisplay.textContent = `¥${nextCoinMilestone}`;
+                // 更新Next target显示
+                nextTargetDisplay.textContent = `$${nextCoinMilestone}`;
 
                 // 检查是否达到金币里程碑
                 if (currentSalary >= nextCoinMilestone && currentTime - lastCoinTime > COIN_COOLDOWN) {

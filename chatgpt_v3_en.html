@@ -1,45 +1,45 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <!-- SEO Meta Tags -->
-  <title>ChatGPT终版 - 实时工资计算器 | 功能完善版本</title>
-  <meta name="description" content="ChatGPT终版实时工资计算器，功能完善的界面设计，支持多种输入方式，实时显示收入进度，让工作更有成就感！">
-  <meta name="keywords" content="ChatGPT,工资计算器,实时工资,时薪计算,收入跟踪,薪资计算,工作收入,AI工具,终版">
+  <title>ChatGPT Final - Real-time Salary Calculator | Feature Complete Edition</title>
+  <meta name="description" content="ChatGPT Final real-time salary calculator with richer inputs, progress display, and dynamic effects.">
+  <meta name="keywords" content="ChatGPT,salary calculator,real-time earnings,hourly wage tracker,income tracker,final edition">
   <meta name="author" content="Yumi">
   <meta name="robots" content="index, follow">
-  
+
   <!-- Canonical URL -->
-  <link rel="canonical" href="https://salary.gcc.ac.cn/chatgpt_v3.html">
-  
+  <link rel="canonical" href="https://salary.gcc.ac.cn/chatgpt_v3_en.html">
+
   <!-- Language Alternates -->
-  <link rel="alternate" hreflang="zh-CN" href="https://salary.gcc.ac.cn/chatgpt_v3.html">
+  <link rel="alternate" hreflang="en" href="https://salary.gcc.ac.cn/chatgpt_v3_en.html">
   <link rel="alternate" hreflang="en" href="https://salary.gcc.ac.cn/chatgpt_v3_en.html">
   <link rel="alternate" hreflang="x-default" href="https://salary.gcc.ac.cn/chatgpt_v3_en.html">
 
   <!-- Open Graph Meta Tags -->
-  <meta property="og:title" content="ChatGPT终版 - 实时工资计算器 | 功能完善版本">
-  <meta property="og:description" content="ChatGPT终版实时工资计算器，功能完善的界面设计，支持多种输入方式，实时显示收入进度，让工作更有成就感！">
-  <meta property="og:url" content="https://salary.gcc.ac.cn/chatgpt_v3.html">
-  <meta property="og:site_name" content="实时工资计算器">
-  <meta property="og:locale" content="zh_CN">
+  <meta property="og:title" content="ChatGPT Final - Real-time Salary Calculator | Feature Complete Edition">
+  <meta property="og:description" content="ChatGPT Final real-time salary calculator with richer inputs, progress display, and dynamic effects.">
+  <meta property="og:url" content="https://salary.gcc.ac.cn/chatgpt_v3_en.html">
+  <meta property="og:site_name" content="Real-time Salary Calculator">
+  <meta property="og:locale" content="en_US">
   <meta property="og:type" content="website">
   <!-- <meta property="og:image" content="https://salary.gcc.ac.cn/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630"> -->
-  
+
   <!-- Twitter Card Meta Tags -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="ChatGPT终版 - 实时工资计算器 | 功能完善版本">
-  <meta name="twitter:description" content="ChatGPT终版实时工资计算器，功能完善的界面设计，支持多种输入方式，实时显示收入进度，让工作更有成就感！">
+  <meta name="twitter:title" content="ChatGPT Final - Real-time Salary Calculator | Feature Complete Edition">
+  <meta name="twitter:description" content="ChatGPT Final real-time salary calculator with richer inputs, progress display, and dynamic effects.">
   <!-- <meta name="twitter:image" content="https://salary.gcc.ac.cn/og-image.png"> -->
-  
+
   <!-- Additional Meta Tags -->
   <meta name="theme-color" content="#10a37f">
   <meta name="msapplication-TileColor" content="#10a37f">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="实时工资计算器">
-  
+  <meta name="apple-mobile-web-app-title" content="Real-time Salary Calculator">
+
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-7DS78VMN1P"></script>
   <script>
@@ -90,15 +90,15 @@
   </style>
 </head>
 <body>
-  <h1>💰 实时工资计算器 💰</h1>
-  <input type="number" id="hourlyRate" placeholder="输入时薪 (元/小时)" />
-  <input type="number" id="workHours" placeholder="输入工作时长 (小时)" />
-  <button onclick="startEarning()">开始计时</button>
-  <div id="earnings">￥0.00</div>
+  <h1>💰 Real-time Salary Calculator 💰</h1>
+  <input type="number" id="hourlyRate" placeholder="Enter hourly rate (USD/hour)" />
+  <input type="number" id="workHours" placeholder="Enter work duration (hours)" />
+  <button onclick="startEarning()">Start Tracking</button>
+  <div id="earnings">$0.00</div>
   <div id="progress">
     <div id="progress-bar"></div>
   </div>
-  <p>⏳ 时长: <span id="timeElapsed">0:00:00</span> | 💸 每秒收入: ￥<span id="perSecond">0.00</span></p>
+  <p>⏳ Elapsed: <span id="timeElapsed">0:00:00</span> | 💸 Income per second: $<span id="perSecond">0.00</span></p>
 
   <script>
     let hourlyRate = 0;
@@ -112,7 +112,7 @@
       hourlyRate = parseFloat(document.getElementById('hourlyRate').value) || 0;
       workHours = parseFloat(document.getElementById('workHours').value) || 0;
       if (hourlyRate <= 0 || workHours <= 0) {
-        alert('请输入有效的时薪和工作时长');
+        alert('Please enter a valid hourly rate and work duration');
         return;
       }
 
@@ -129,7 +129,7 @@
       const targetEarnings = perSecond * elapsedTime;
       earnings = targetEarnings;
 
-      document.getElementById('earnings').textContent = `￥${earnings.toFixed(2)}`;
+      document.getElementById('earnings').textContent = `$${earnings.toFixed(2)}`;
       document.getElementById('timeElapsed').textContent = formatTime(elapsedTime);
       document.getElementById('perSecond').textContent = perSecond.toFixed(2);
 
@@ -164,6 +164,6 @@
       }
     }
   </script>
-  <a href="index.html" class="home-link">返回主页</a>
+  <a href="index_en.html" class="home-link">Back to Home</a>
 </body>
 </html>

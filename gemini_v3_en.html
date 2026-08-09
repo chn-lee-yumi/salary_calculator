@@ -1,46 +1,46 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 
 <head>
     <!-- SEO Meta Tags -->
-    <title>Gemini终版 - 实时工资计算器 | 简洁实用版本</title>
-    <meta name="description" content="Gemini终版实时工资计算器，简洁实用的界面设计，支持多种输入方式，实时显示收入进度和金币特效，让工作更有成就感！">
-    <meta name="keywords" content="Gemini,工资计算器,实时工资,时薪计算,收入跟踪,薪资计算,工作收入,AI工具,终版,简洁版">
+    <title>Gemini Final - Real-time Salary Calculator | Practical Clean Edition</title>
+    <meta name="description" content="Gemini Final real-time salary calculator with practical inputs, progress tracking, and coin animations.">
+    <meta name="keywords" content="Gemini,salary calculator,real-time earnings,hourly wage tracker,final edition,clean UI">
     <meta name="author" content="Yumi">
     <meta name="robots" content="index, follow">
-    
+
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://salary.gcc.ac.cn/gemini_v3.html">
-    
+    <link rel="canonical" href="https://salary.gcc.ac.cn/gemini_v3_en.html">
+
     <!-- Language Alternates -->
-    <link rel="alternate" hreflang="zh-CN" href="https://salary.gcc.ac.cn/gemini_v3.html">
+    <link rel="alternate" hreflang="en" href="https://salary.gcc.ac.cn/gemini_v3_en.html">
     <link rel="alternate" hreflang="en" href="https://salary.gcc.ac.cn/gemini_v3_en.html">
     <link rel="alternate" hreflang="x-default" href="https://salary.gcc.ac.cn/gemini_v3_en.html">
 
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Gemini终版 - 实时工资计算器 | 简洁实用版本">
-    <meta property="og:description" content="Gemini终版实时工资计算器，简洁实用的界面设计，支持多种输入方式，实时显示收入进度和金币特效，让工作更有成就感！">
-    <meta property="og:url" content="https://salary.gcc.ac.cn/gemini_v3.html">
-    <meta property="og:site_name" content="实时工资计算器">
-    <meta property="og:locale" content="zh_CN">
+    <meta property="og:title" content="Gemini Final - Real-time Salary Calculator | Practical Clean Edition">
+    <meta property="og:description" content="Gemini Final real-time salary calculator with practical inputs, progress tracking, and coin animations.">
+    <meta property="og:url" content="https://salary.gcc.ac.cn/gemini_v3_en.html">
+    <meta property="og:site_name" content="Real-time Salary Calculator">
+    <meta property="og:locale" content="en_US">
     <meta property="og:type" content="website">
     <!-- <meta property="og:image" content="https://salary.gcc.ac.cn/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630"> -->
-    
+
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Gemini终版 - 实时工资计算器 | 简洁实用版本">
-    <meta name="twitter:description" content="Gemini终版实时工资计算器，简洁实用的界面设计，支持多种输入方式，实时显示收入进度和金币特效，让工作更有成就感！">
+    <meta name="twitter:title" content="Gemini Final - Real-time Salary Calculator | Practical Clean Edition">
+    <meta name="twitter:description" content="Gemini Final real-time salary calculator with practical inputs, progress tracking, and coin animations.">
     <!-- <meta name="twitter:image" content="https://salary.gcc.ac.cn/og-image.png"> -->
-    
+
     <!-- Additional Meta Tags -->
     <meta name="theme-color" content="#ea580c">
     <meta name="msapplication-TileColor" content="#ea580c">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="实时工资计算器">
-    
+    <meta name="apple-mobile-web-app-title" content="Real-time Salary Calculator">
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-7DS78VMN1P"></script>
     <script>
@@ -53,7 +53,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8336276656855850" crossorigin="anonymous"></script>
-    <title>实时工资计算器</title>
+    <title>Real-time Salary Calculator</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -197,15 +197,15 @@
 </head>
 <body>
     <div class="container">
-        <h1>实时工资计算器</h1>
+        <h1>Real-time Salary Calculator</h1>
 
         <!-- 输入区域 -->
         <div>
-            <label for="hourly-rate">时薪（元）：</label>
+            <label for="hourly-rate">Hourly rate (USD):</label>
             <input type="number" id="hourly-rate" value="50">
-            <label for="work-hours">工作时长（小时）：</label>
+            <label for="work-hours">工作Elapsed（小时）：</label>
             <input type="number" id="work-hours" value="8">
-            <button id="start-button">开始计时</button>
+            <button id="start-button">Start Tracking</button>
         </div>
 
         <!-- 工资显示 -->
@@ -217,13 +217,13 @@
         </div>
 
         <!-- 其他信息 -->
-        <div class="info-item">已工作：<span id="elapsed-time">0</span> 秒</div>
-        <div class="info-item">每秒收入：<span id="income-per-second">0.00</span> 元</div>
+        <div class="info-item">Worked: <span id="elapsed-time">0</span> 秒</div>
+        <div class="info-item">Income per second: $<span id="income-per-second">0.00</span></div>
     </div>
-    <a href="index.html" class="home-link">返回主页</a>
+    <a href="index_en.html" class="home-link">Back to Home</a>
 
     <script>
-        // 获取 DOM 元素
+        // Get DOM elements
         const hourlyRateInput = document.getElementById('hourly-rate');
         const workHoursInput = document.getElementById('work-hours');
         const startButton = document.getElementById('start-button');
@@ -242,25 +242,25 @@
         let lastHundred = 0; // 上次撒金币时的工资
         let animationFrameId = null;
 
-        // 开始计时
+        // Start Tracking
         startButton.addEventListener('click', () => {
             // 获取输入值
             hourlyRate = parseFloat(hourlyRateInput.value);
             workHours = parseFloat(workHoursInput.value);
 
             if (isNaN(hourlyRate) || isNaN(workHours) || hourlyRate <= 0 || workHours <= 0) {
-                alert('请输入有效的时薪和工作时长！');
+                alert('请输入有效的时薪和工作Elapsed！');
                 return;
             }
 
-            // 计算每秒收入和总秒数
+            // 计算Income per second和总秒数
             incomePerSecond = hourlyRate / 3600;
             totalSeconds = workHours * 3600;
 
             // 更新显示
             incomePerSecondDisplay.textContent = incomePerSecond.toFixed(4);
 
-            // 重置状态
+            // Reset状态
             startTime = Date.now();
             earnedWage = 0;
             lastHundred = 0;
@@ -290,7 +290,7 @@
             const now = Date.now();
             const elapsedSeconds = (now - startTime) / 1000;
 
-            // 如果超出预设工作时长，则停止
+            // 如果超出预设工作Elapsed，则停止
             if (elapsedSeconds >= totalSeconds) {
                 earnedWage = hourlyRate * workHours; // 最终工资
                 elapsedTimeDisplay.textContent = totalSeconds.toFixed(0);
@@ -384,3 +384,4 @@
 </body>
 
 </html>
+

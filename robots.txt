@@ -3,6 +3,7 @@ Allow: /
 
 # Sitemap
 Sitemap: https://salary.gcc.ac.cn/sitemap.txt
+Sitemap: https://salary.gcc.ac.cn/sitemap.xml
 
 # Crawl-delay
 Crawl-delay: 1 
